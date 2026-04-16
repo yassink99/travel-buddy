@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Travel Buddy</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        
+        <!-- Splash Screen -->
+        <div id="screen-splash" class="screen active">
+            <div class="splash-content">
+                <i class="ri-flight-takeoff-line splash-logo"></i>
+                <h1>Travel Buddy</h1>
+                <p>Find your perfect travel partner</p>
+            </div>
+            <div class="splash-loader"></div>
+        </div>
+
+        <!-- Login / Sign Up Screen -->
+        <div id="screen-auth" class="screen">
+            <div class="auth-header">
+                <h2>Welcome</h2>
+                <p>Sign in to start exploring</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-target="login-form">Login</button>
+                <button class="auth-tab" data-target="signup-form">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form active">
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="login-phone" placeholder="e.g. 01012345678" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signup-form" class="auth-form hidden">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="signup-name" placeholder="John Doe" required>
+                </div>
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="signup-phone" placeholder="e.g. 01012345678" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            </form>
+        </div>
+
+        <!-- Profile Setup Screen -->
+        <div id="screen-profile-setup" class="screen">
+            <header class="app-header">
+                <h2>Setup Profile</h2>
+            </header>
+            <div class="content-scroll">
+                <form id="profile-setup-form" class="form-container">
+                    <div class="avatar-upload">
+                        <img src="https://ui-avatars.com/api/?name=User&background=random" id="profile-preview" alt="Avatar">
+                        <p class="hint">Tap to change (mocked)</p>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Age</label>
+                        <input type="number" id="profile-age" min="18" max="100" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Gender</label>
+                        <select id="profile-gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Preferred Travel Style</label>
+                        <select id="profile-style" required>
+                            <option value="">Select Style</option>
+                            <option value="Budget">Budget</option>
+                            <option value="Luxury">Luxury</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="Chill">Chill</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Short Bio</label>
+                        <textarea id="profile-bio" rows="3" placeholder="Tell others about yourself..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Save Profile</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Browse Trips Screen -->
+        <div id="screen-browse" class="screen with-bottom-nav">
+            <header class="app-header with-search">
+                <div class="header-content">
+                    <h2>Explore Trips</h2>
+                    <button id="btn-logout" class="icon-btn"><i class="ri-logout-box-r-line"></i></button>
+                </div>
+                <div class="search-bar">
+                    <i class="ri-search-line"></i>
+                    <input type="text" id="search-destination" placeholder="Where do you want to go?">
+                </div>
+            </header>
+            <div class="content-scroll">
+                <div id="trips-feed" class="trips-container">
+                    <!-- Tripe items will be injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Trip Screen -->
+        <div id="screen-create" class="screen with-bottom-nav">
+            <header class="app-header">
+                <h2>Create a Trip</h2>
+            </header>
+            <div class="content-scroll">
+                <form id="create-trip-form" class="form-container">
+                    <div class="input-group">
+                        <label>Destination</label>
+                        <input type="text" id="trip-dest" placeholder="e.g. Dahab, Alexandria" required>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="input-group half">
+                            <label>Start Date</label>
+                            <input type="date" id="trip-start" required>
+                        </div>
+                        <div class="input-group half">
+                            <label>End Date</label>
+                            <input type="date" id="trip-end" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Budget Range</label>
+                        <select id="trip-budget" required>
+                            <option value="Low">Low Budget (Backpacker)</option>
+                            <option value="Medium">Medium (Comfortable)</option>
+                            <option value="High">High (Luxury)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Description</label>
+                        <textarea id="trip-desc" rows="4" placeholder="What's the plan? Who are you looking for?" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Post Trip</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Trip Details Screen -->
+        <div id="screen-trip-details" class="screen nested">
+            <header class="app-header transparent">
+                <button class="back-btn" onclick="app.navigate('browse')"><i class="ri-arrow-left-s-line"></i></button>
+                <div class="header-actions">
+                    <button class="icon-btn action-menu-trigger"><i class="ri-more-2-fill"></i></button>
+                    <!-- Small mock menu -->
+                    <div class="action-menu hidden">
+                        <button class="menu-item text-danger"><i class="ri-error-warning-line"></i> Report User</button>
+                        <button class="menu-item text-danger"><i class="ri-shield-user-line"></i> Block User</button>
+                    </div>
+                </div>
+            </header>
+            <div class="content-scroll p-0" id="trip-details-content">
+                <!-- Injected content -->
+            </div>
+            <div class="bottom-action-bar" id="trip-action-bar">
+                <!-- Action button injected here -->
+            </div>
+        </div>
+
+        <!-- Chats List Screen -->
+        <div id="screen-chats" class="screen with-bottom-nav">
+            <header class="app-header">
+                <h2>Messages / Requests</h2>
+            </header>
+            <div class="content-scroll">
+                
+                <div class="section-title">Pending Requests</div>
+                <div id="requests-list" class="requests-container list-container">
+                    <!-- Pending requests here -->
+                </div>
+
+                <div class="section-title">Active Chats</div>
+                <div id="chats-feed" class="chats-container list-container">
+                    <!-- Chats here -->
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- Active Chat Screen -->
+        <div id="screen-active-chat" class="screen nested">
+            <header class="app-header">
+                <button class="back-btn" onclick="app.navigate('chats')"><i class="ri-arrow-left-s-line"></i></button>
+                <div class="chat-header-info" id="active-chat-user">
+                    <h3>Chat</h3>
+                </div>
+            </header>
+            <div class="chat-area" id="chat-messages-area">
+                <!-- Messages injected here -->
+            </div>
+            <div class="chat-input-area">
+                <form id="chat-form">
+                    <input type="text" id="chat-input" placeholder="Type a message..." required autocomplete="off">
+                    <button type="submit" class="send-btn"><i class="ri-send-plane-fill"></i></button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Profile View Screen -->
+        <div id="screen-profile" class="screen with-bottom-nav">
+            <header class="app-header">
+                <h2>My Profile</h2>
+                <button class="icon-btn" onclick="app.navigate('profile-setup')"><i class="ri-edit-line"></i></button>
+            </header>
+            <div class="content-scroll" id="profile-view-content">
+                <!-- Profile details here -->
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav id="bottom-nav" class="bottom-nav hidden">
+            <button class="nav-item active" data-target="browse">
+                <i class="ri-compass-3-line"></i>
+                <i class="ri-compass-3-fill active-icon"></i>
+                <span>Explore</span>
+            </button>
+            <button class="nav-item" data-target="create">
+                <i class="ri-add-circle-line"></i>
+                <i class="ri-add-circle-fill active-icon"></i>
+                <span>Create</span>
+            </button>
+            <button class="nav-item" data-target="chats">
+                <i class="ri-message-3-line"></i>
+                <i class="ri-message-3-fill active-icon"></i>
+                <span class="badge" id="chat-badge" style="display: none;">!</span>
+                <span>Chats</span>
+            </button>
+            <button class="nav-item" data-target="profile">
+                <i class="ri-user-line"></i>
+                <i class="ri-user-fill active-icon"></i>
+                <span>Profile</span>
+            </button>
+        </nav>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="toast hidden">Message</div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="db.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
